@@ -13,12 +13,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.placemark.R
 import com.example.placemark.activities.adapters.PlacemarkAdapter
+import com.example.placemark.activities.adapters.PlacemarkListener
 import com.example.placemark.databinding.CardPlacemarkBinding
 import com.example.placemark.activities.main.MainApp
 import com.example.placemark.activities.models.PlacemarkModel
 import com.example.placemark.databinding.ActivityPlacemarkListBinding
 
-class PlacemarkListActivity : AppCompatActivity() {
+class PlacemarkListActivity : AppCompatActivity(), PlacemarkListener {
 
     lateinit var app: MainApp
     private lateinit var binding: ActivityPlacemarkListBinding
@@ -34,7 +35,7 @@ class PlacemarkListActivity : AppCompatActivity() {
 
         val layoutManager = LinearLayoutManager(this)
         binding.recyclerView.layoutManager = layoutManager
-        binding.recyclerView.adapter = PlacemarkAdapter(app.placemarks.findAll())
+        binding.recyclerView.adapter = PlacemarkAdapter(app.placemarks.findAll(), this)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -53,6 +54,21 @@ class PlacemarkListActivity : AppCompatActivity() {
     }
 
     private val getResult =
+        registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult()
+        ) {
+            if (it.resultCode == Activity.RESULT_OK) {
+                (binding.recyclerView.adapter)?.
+                notifyItemRangeChanged(0,app.placemarks.findAll().size)
+            }
+        }
+
+    override fun onPlacemarkClick(placemark: PlacemarkModel) {
+        val launcherIntent = Intent(this, PlacemarkActivity::class.java)
+        getClickResult.launch(launcherIntent)
+    }
+
+    private val getClickResult =
         registerForActivityResult(
             ActivityResultContracts.StartActivityForResult()
         ) {
