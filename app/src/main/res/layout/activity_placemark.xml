@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.PlacemarkActivity">
+    tools:context=".activities.activities.PlacemarkActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -14,16 +14,17 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.appbar.AppBarLayout
-            android:id="@+id/appBarLayout"
+            android:id="@+id/abl"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/colorAccent"
             android:fitsSystemWindows="true"
             app:elevation="0dip"
-            app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+            app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            tools:ignore="MissingConstraints">
 
             <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbarAdd"
+                android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:titleTextColor="@color/colorPrimary" />
@@ -32,7 +33,7 @@
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/appBarLayout"
+            android:layout_below="@id/abl"
             android:fillViewport="true">
 
             <LinearLayout
