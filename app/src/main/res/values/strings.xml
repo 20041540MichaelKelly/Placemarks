@@ -7,4 +7,6 @@
     <string name="menu_cancelPlacemark">Cancel</string>
     <string name="enter_title_error">Please Enter a title</string>
     <string name="save_placemark">Save Placemark</string>
+    <string name="button_addImage"> Add Image </string>
+
 </resources>

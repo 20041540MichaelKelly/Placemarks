@@ -53,6 +53,10 @@ class PlacemarkActivity : AppCompatActivity() {
                     .show()
             }
         }
+
+        binding.chooseImage.setOnClickListener {
+            i("Select image")
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
