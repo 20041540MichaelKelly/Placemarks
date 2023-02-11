@@ -18,6 +18,7 @@ class PlacemarkActivity : AppCompatActivity() {
     private lateinit var binding: ActivityPlacemarkBinding
     var placemark = PlacemarkModel()
     lateinit var app: MainApp
+    var edit = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,16 +28,28 @@ class PlacemarkActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolbar)
 
         app = application as MainApp
-        i("Placemark Activity started...")
+        if (intent.hasExtra("placemark_edit")) {
+            placemark = intent.extras?.getParcelable("placemark_edit")!!
+            binding.placemarkTitle.setText(placemark.title)
+            binding.placemarkDescription.setText(placemark.description)
+            edit = true
+        }
+        if(edit) {
+            binding.btnAdd.text = getString(R.string.save_placemark)
+        }
         binding.btnAdd.setOnClickListener() {
             placemark.title = binding.placemarkTitle.text.toString()
             placemark.description = binding.placemarkDescription.text.toString()
             if (placemark.title.isNotEmpty()) {
-                app.placemarks.create(placemark.copy())
+                if(edit) {
+                    app.placemarks.update(placemark.copy())
+                }else {
+                    app.placemarks.create(placemark.copy())
+                }
                 setResult(RESULT_OK)
                 finish()
             } else {
-                Snackbar.make(it, "Please Enter a title", Snackbar.LENGTH_LONG)
+                Snackbar.make(it, getString(R.string.enter_title_error), Snackbar.LENGTH_LONG)
                     .show()
             }
         }
