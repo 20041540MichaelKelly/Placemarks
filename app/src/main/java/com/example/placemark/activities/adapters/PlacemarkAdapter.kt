@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.placemark.activities.models.PlacemarkModel
 import com.example.placemark.databinding.CardPlacemarkBinding
+import com.squareup.picasso.Picasso
 
 interface PlacemarkListener {
     fun onPlacemarkClick(placemark: PlacemarkModel)
@@ -33,6 +34,9 @@ class PlacemarkAdapter constructor(private var placemarks: List<PlacemarkModel>,
         fun bind(placemark: PlacemarkModel, listener: PlacemarkListener) {
             binding.placemarkTitle.text = placemark.title
             binding.description.text = placemark.description
+            Picasso.get()
+                .load(placemark.image)
+                .into(binding.cardPlacemarkImage)
             binding.root.setOnClickListener { listener.onPlacemarkClick(placemark)}
         }
     }

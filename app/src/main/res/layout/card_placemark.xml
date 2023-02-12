@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_marginBottom="8dp"
     android:elevation="24dp">
 
@@ -12,12 +12,22 @@
         android:layout_height="wrap_content"
         android:padding="16dp">
 
+        <ImageView
+            android:id="@+id/card_placemarkImage"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_alignParentStart="true"
+            app:srcCompat="@mipmap/ic_launcher"/>
+
         <TextView
             android:id="@+id/placemarkTitle"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:textSize="30sp"
+            android:layout_toEndOf="@id/card_placemarkImage"
+            android:layout_marginTop="45dp"
+            android:padding="5dp"
+            android:textSize="25sp"
             tools:text="A Title" />
 
         <TextView
@@ -25,6 +35,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/placemarkTitle"
+            android:layout_toEndOf="@id/card_placemarkImage"
+            android:padding="5dp"
+            android:textSize="25sp"
             tools:text="A Description" />
 
     </RelativeLayout>
