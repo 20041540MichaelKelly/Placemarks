@@ -1,7 +1,7 @@
 package com.example.placemark.activities.activities
 
-import android.app.Activity
 import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
@@ -41,9 +41,11 @@ class PlacemarkActivity : AppCompatActivity() {
                 .load(placemark.image)
                 .into(binding.placemarkImage)
         }
+        if (placemark.image != Uri.EMPTY) {
+            binding.chooseImage.setText(R.string.change_placemark_image)
+        }
         if(edit) {
             binding.btnAdd.text = getString(R.string.save_placemark)
-            binding.chooseImage.text = getString(R.string.change_image)
         }
         binding.btnAdd.setOnClickListener() {
             placemark.title = binding.placemarkTitle.text.toString()
@@ -94,6 +96,7 @@ class PlacemarkActivity : AppCompatActivity() {
                             Picasso.get()
                                 .load(placemark.image)
                                 .into(binding.placemarkImage)
+                            binding.chooseImage.setText(R.string.change_placemark_image)
                         } // end of if
                     }
                     RESULT_CANCELED -> { } else -> { }
